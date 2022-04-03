@@ -11,6 +11,7 @@ import { UsersService } from 'src/app/services/user.service';
 export class LoginComponent implements OnInit {
   showModal = false;
   user: User = new User();
+  userIsLoggedIn: boolean = false;
 
   constructor(
     private userService: UsersService,
@@ -18,6 +19,7 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.isLoggedIn();
   }
   toggleModal(){
     this.showModal = !this.showModal;
@@ -34,6 +36,19 @@ export class LoginComponent implements OnInit {
       error: () => {
       console.log(Error);
       }
+    });
+  }
+  isLoggedIn(){
+    if(this.userService.isLoggedIn()) {
+      this.userIsLoggedIn = true;
+    } else {
+      this.userIsLoggedIn = false;
+    }
+  }
+  logout(){
+    this.userService.logout();
+    this.router.navigateByUrl('/').then(() => {
+      window.location.reload()
     });
   }
 }

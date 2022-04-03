@@ -9,12 +9,16 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { LoginComponent } from './components/login/login.component';
 import { UsersService } from './services/user.service';
+import { HabilidadComponent } from './components/habilidad/habilidad.component';
+import { HabilidadesComponent } from './components/habilidades/habilidades.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    LoginComponent
+    LoginComponent,
+    HabilidadComponent,
+    HabilidadesComponent
   ],
   imports: [
     BrowserModule,

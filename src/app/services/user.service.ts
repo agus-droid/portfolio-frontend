@@ -26,4 +26,11 @@ export class UsersService {
     return this.cookies.get("token");
   }
 
+  isLoggedIn() {
+    return this.cookies.get("token") ? true : false;
+  }
+
+  logout() {
+    this.cookies.delete("token");
+  }
 }
