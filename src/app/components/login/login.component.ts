@@ -21,30 +21,26 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.isLoggedIn();
+    let currentUser = this.userService.UsuarioAutenticado;
+    if(currentUser && currentUser.token){
+      this.userIsLoggedIn = true;
+      };
   }
   toggleModal(){
     this.showModal = !this.showModal;
   }
-  login() {
+  login(event: Event) {
+    event.preventDefault;
     this.userService.login(this.user).subscribe({
       next: (data: any) => {
-        this.userService.setToken(data.token);
-        this.router.navigateByUrl('/').then(() => {
-          window.location.reload()
-        });
+        this.router.navigateByUrl('/')
+        this.toggleModal();
+        this.userIsLoggedIn = true;
       },
       error: () => {
         this.toastr.error('Usuario o contraseña incorrectos', 'Error');
       }
     });
-  }
-  isLoggedIn(){
-    if(this.userService.isLoggedIn()) {
-      this.userIsLoggedIn = true;
-    } else {
-      this.userIsLoggedIn = false;
-    }
   }
   logout(){
     this.userService.logout();

@@ -1,36 +1,34 @@
 import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-import { Observable } from "rxjs";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { BehaviorSubject, map, Observable } from "rxjs";
 import { User } from "../models/user";
-import { CookieService } from 'ngx-cookie-service';
+import { environment } from "src/environments/environment";
 
 
 @Injectable({
   providedIn: "root"
 })
 export class UsersService {
+  currentUserSubject: BehaviorSubject<any>;
+  private BASE_URL = environment.baseURL;
   constructor(
     private http: HttpClient,
-    private cookies: CookieService
-    ) {}
-
+    ) {
+    console.log("El servicio esta funcionando");
+    this.currentUserSubject = new BehaviorSubject<any>(JSON.parse(sessionStorage.getItem("currentUser")||'{}'));
+  }
   login(user: User): Observable<any> {
-    return this.http.post("http://localhost:8500/auth/login", user);
+    return this.http.post(`${this.BASE_URL}/auth/login`, user).pipe(map(data => {
+      sessionStorage.setItem("currentUser", JSON.stringify(data));
+      this.currentUserSubject.next(data);
+      return data;
+    }));
   }
-
-  setToken(token: string) {
-    this.cookies.set("token", token);
-  }
-
-  getToken() {
-    return this.cookies.get("token");
-  }
-
-  isLoggedIn() {
-    return this.cookies.get("token") ? true : false;
+  get UsuarioAutenticado(){
+    return this.currentUserSubject.value;
   }
 
   logout() {
-    this.cookies.delete("token");
+    sessionStorage.removeItem('currentUser');
   }
 }

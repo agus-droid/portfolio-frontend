@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -12,6 +12,7 @@ import { LoginComponent } from './components/login/login.component';
 import { UsersService } from './services/user.service';
 import { HabilidadComponent } from './components/habilidad/habilidad.component';
 import { HabilidadesComponent } from './components/habilidades/habilidades.component';
+import { InterceptorService } from './services/interceptor.service';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { HabilidadesComponent } from './components/habilidades/habilidades.compo
   ],
   providers: [
     UsersService,
-    CookieService
+    CookieService,
+    { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true }
   ],
   bootstrap: [AppComponent]
 })
