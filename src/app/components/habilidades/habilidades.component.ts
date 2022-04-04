@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { Habilidad } from 'src/app/models/habilidad';
 import { HabilidadService } from 'src/app/services/habilidad.service';
 
@@ -12,7 +13,8 @@ export class HabilidadesComponent implements OnInit {
   loading: boolean = false;
   error: boolean = false;
   constructor(
-    private habilidadService: HabilidadService
+    private habilidadService: HabilidadService,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit(): void {
@@ -26,12 +28,11 @@ export class HabilidadesComponent implements OnInit {
       next: (data: Habilidad[]) => {
         this.habilidades = data;
         this.loading = false;
-        console.log(data);
       },
       error: (err) => {
         this.error = true;
         this.loading = false;
-        console.log(err);
+        this.toastr.error('Error al obtener las habilidades', 'Error');
       }
     });
   }
