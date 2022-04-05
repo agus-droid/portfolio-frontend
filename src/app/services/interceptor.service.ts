@@ -21,7 +21,6 @@ export class InterceptorService implements HttpInterceptor {
         }
       });
     }
-    console.log("Interceptando peticiones");
     return next.handle(req);
   }
 }

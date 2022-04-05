@@ -14,7 +14,6 @@ export class UsersService {
   constructor(
     private http: HttpClient,
     ) {
-    console.log("El servicio esta funcionando");
     this.currentUserSubject = new BehaviorSubject<any>(JSON.parse(sessionStorage.getItem("currentUser")||'{}'));
   }
   login(user: User): Observable<any> {

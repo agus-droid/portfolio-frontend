@@ -13,6 +13,10 @@ import { UsersService } from './services/user.service';
 import { HabilidadComponent } from './components/habilidad/habilidad.component';
 import { HabilidadesComponent } from './components/habilidades/habilidades.component';
 import { InterceptorService } from './services/interceptor.service';
+import { ProyectoComponent } from './components/proyecto/proyecto.component';
+import { ProyectosComponent } from './components/proyectos/proyectos.component';
+import { EducacionesComponent } from './components/educaciones/educaciones.component';
+import { EducacionComponent } from './components/educacion/educacion.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +24,11 @@ import { InterceptorService } from './services/interceptor.service';
     HeaderComponent,
     LoginComponent,
     HabilidadComponent,
-    HabilidadesComponent
+    HabilidadesComponent,
+    ProyectoComponent,
+    ProyectosComponent,
+    EducacionesComponent,
+    EducacionComponent
   ],
   imports: [
     BrowserModule,
