@@ -1,10 +1,10 @@
-export class Educacion {
+export class Experiencia {
   id: number;
   titulo: string;
   descripcion: string;
   imagen: string;
   fecha: string;
-  constructor() {
+  constructor(){
     this.id = 0;
     this.titulo = "";
     this.descripcion = "";

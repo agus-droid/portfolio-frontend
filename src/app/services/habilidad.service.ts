@@ -21,8 +21,8 @@ export class HabilidadService {
     return this.http.post<String>(`${this.API_URL}/nueva`, habilidad);
   }
 
-  delete(habilidad: Habilidad): Observable<Habilidad> {
-    return this.http.delete<Habilidad>(`${this.API_URL}/borrar/${habilidad.id}`);
+  delete(habilidad: Habilidad): any {
+    return this.http.delete(`${this.API_URL}/borrar/${habilidad.id}`);
   }
 
   update(habilidad: Habilidad): Observable<Habilidad> {

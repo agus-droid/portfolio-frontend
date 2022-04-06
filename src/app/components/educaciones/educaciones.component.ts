@@ -38,4 +38,17 @@ export class EducacionesComponent implements OnInit {
       }
     });
   }
+
+  delete(educacion: Educacion){
+    this.educacionService.delete(educacion).subscribe({
+      next: (data: any) => {
+        this.getAll();
+        this.toastr.success('Educacion eliminada', 'Éxito');
+      },
+      error: () => {
+        this.toastr.error('Error al eliminar la educacion', 'Error');
+      }
+    });
+  }
+
 }

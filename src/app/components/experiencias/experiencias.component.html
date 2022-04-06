@@ -1,5 +1,5 @@
 <div class="pb-4 mb-2 border-b border-gray-200 dark:border-gray-800">
-  <h2 class="inline-block mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white" id="content">Educación</h2>
+  <h2 class="inline-block mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white" id="content">Experiencia</h2>
 </div>
 <div class="flex items-center justify-center">
   <button *ngIf="loading" type="button" class="inline-flex items-center px-4 py-2 font-semibold leading-6 text-sm shadow rounded-md text-white bg-indigo-500 hover:bg-indigo-400 transition ease-in-out duration-150 cursor-not-allowed" disabled="">
@@ -11,7 +11,5 @@
   </button>
 </div>
 <div *ngIf="!loading">
-  <app-educacion (onDelete)="delete(educacion)" *ngFor="let educacion of educaciones" [educacion]="educacion"></app-educacion>
+  <app-experiencia (onDelete)="delete(experiencia)" *ngFor="let experiencia of experiencias" [experiencia]="experiencia"></app-experiencia>
 </div>
-
-

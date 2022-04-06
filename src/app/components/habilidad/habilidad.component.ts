@@ -1,5 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { Habilidad } from 'src/app/models/habilidad';
+import { HabilidadService } from 'src/app/services/habilidad.service';
+import { UsersService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-habilidad',
@@ -10,11 +13,19 @@ export class HabilidadComponent implements OnInit {
 
   @Input() habilidad: Habilidad = new Habilidad();
 
-  @Output() onHabilidad = new EventEmitter<Habilidad>();
+  @Output() onDelete = new EventEmitter<Habilidad>();
 
-  constructor() { }
+  constructor(
+    public userService: UsersService,
+    private toastr: ToastrService,
+    private habilidadService: HabilidadService
+  ) { }
 
   ngOnInit(): void {
+  }
+
+  delete() {
+    this.onDelete.emit(this.habilidad);
   }
 
 }

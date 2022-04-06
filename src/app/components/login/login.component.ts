@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { User } from 'src/app/models/user';
 import { UsersService } from 'src/app/services/user.service';
@@ -12,20 +11,14 @@ import { UsersService } from 'src/app/services/user.service';
 export class LoginComponent implements OnInit {
   showModal = false;
   user: User = new User();
-  userIsLoggedIn: boolean = false;
 
   constructor(
-    private userService: UsersService,
-    private router: Router,
+    public userService: UsersService,
     private toastr: ToastrService,
   ) {}
 
-  ngOnInit(): void {
-    let currentUser = this.userService.UsuarioAutenticado;
-    if(currentUser && currentUser.token){
-      this.userIsLoggedIn = true;
-      };
-  }
+  ngOnInit(): void { }
+
   toggleModal(){
     this.showModal = !this.showModal;
   }
@@ -33,9 +26,7 @@ export class LoginComponent implements OnInit {
     event.preventDefault;
     this.userService.login(this.user).subscribe({
       next: (data: any) => {
-        this.router.navigateByUrl('/')
         this.toggleModal();
-        this.userIsLoggedIn = true;
       },
       error: () => {
         this.toastr.error('Usuario o contraseña incorrectos', 'Error');
@@ -44,8 +35,5 @@ export class LoginComponent implements OnInit {
   }
   logout(){
     this.userService.logout();
-    this.router.navigateByUrl('/').then(() => {
-      window.location.reload()
-    });
   }
 }

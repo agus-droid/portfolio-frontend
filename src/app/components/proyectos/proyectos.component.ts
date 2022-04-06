@@ -37,4 +37,17 @@ export class ProyectosComponent implements OnInit {
       }
     });
   }
+
+  delete(proyecto: Proyecto){
+    this.proyectoService.delete(proyecto).subscribe({
+      next: (data: any) => {
+        this.getAll();
+        this.toastr.success('Proyecto eliminado', 'Éxito');
+      },
+      error: () => {
+        this.toastr.error('Error al eliminar el proyecto', 'Error');
+      }
+    });
+  }
+
 }

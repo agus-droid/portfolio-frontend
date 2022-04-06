@@ -36,4 +36,16 @@ export class HabilidadesComponent implements OnInit {
       }
     });
   }
+
+  delete(habilidad: Habilidad){
+    this.habilidadService.delete(habilidad).subscribe({
+      next: (data: any) => {
+        this.getAll();
+        this.toastr.success('Habilidad eliminada', 'Éxito');
+      },
+      error: () => {
+        this.toastr.error('Error al eliminar la habilidad', 'Error');
+      }
+    });
+  }
 }

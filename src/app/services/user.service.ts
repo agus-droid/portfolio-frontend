@@ -11,6 +11,7 @@ import { environment } from "src/environments/environment";
 export class UsersService {
   currentUserSubject: BehaviorSubject<any>;
   private BASE_URL = environment.baseURL;
+  private userIsLoggedIn: boolean = false;
   constructor(
     private http: HttpClient,
     ) {
@@ -29,5 +30,15 @@ export class UsersService {
 
   logout() {
     sessionStorage.removeItem('currentUser');
+  }
+
+  isLoggedIn() {
+    if (sessionStorage.getItem("currentUser") == null) {
+      this.userIsLoggedIn = false;
+      return this.userIsLoggedIn;
+    }
+    else {
+      return true;
+    }
   }
 }

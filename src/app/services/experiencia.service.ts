@@ -2,20 +2,19 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Educacion } from '../models/educacion';
+import { Experiencia } from '../models/experiencia';
 
 @Injectable({
   providedIn: 'root'
 })
-export class EducacionService {
-
-  private API_URL = `${environment.baseURL}/educacion`;
+export class ExperienciaService {
+  private API_URL = `${environment.baseURL}/experiencia`;
   constructor(
     private http: HttpClient
   ) { }
 
-  getAll(): Observable<Educacion[]> {
-    return this.http.get<Educacion[]>(this.API_URL);
+  getAll(): Observable<Experiencia[]> {
+    return this.http.get<Experiencia[]>(this.API_URL);
   }
 
   fetchImage(imageCode: string): Observable<Blob> {
@@ -23,8 +22,8 @@ export class EducacionService {
     return this.http.get(url, { responseType: 'blob' });
   }
 
-  delete(educacion: Educacion): any {
-    return this.http.delete(`${this.API_URL}/borrar/${educacion.id}`);
+  delete(experiencia: Experiencia): any {
+    return this.http.delete(`${this.API_URL}/borrar/${experiencia.id}`);
   }
 
 }

@@ -1,32 +1,32 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { Educacion } from 'src/app/models/educacion';
-import { EducacionService } from 'src/app/services/educacion.service';
+import { Experiencia } from 'src/app/models/experiencia';
+import { ExperienciaService } from 'src/app/services/experiencia.service';
 import { UsersService } from 'src/app/services/user.service';
 
 @Component({
-  selector: 'app-educacion',
-  templateUrl: './educacion.component.html',
-  styleUrls: ['./educacion.component.css']
+  selector: 'app-experiencia',
+  templateUrl: './experiencia.component.html',
+  styleUrls: ['./experiencia.component.css']
 })
-export class EducacionComponent implements OnInit {
+export class ExperienciaComponent implements OnInit {
 
-  @Input() educacion: Educacion = new Educacion();
+  @Input() experiencia: Experiencia = new Experiencia();
 
-  @Output() onDelete = new EventEmitter<Educacion>();
+  @Output() onDelete = new EventEmitter<Experiencia>();
 
   imagePath: SafeResourceUrl = "";
   loading: boolean = true;
 
   constructor(
-    private educacionService: EducacionService,
+    private experienciaService: ExperienciaService,
     private _sanitizer: DomSanitizer,
     public userService: UsersService
-    ) { }
+  ) { }
 
   ngOnInit(): void {
-    if (this.educacion !== null) {
-      this.educacionService.fetchImage(this.educacion.imagen).subscribe({
+    if (this.experiencia !== null) {
+      this.experienciaService.fetchImage(this.experiencia.imagen).subscribe({
         next: (image) => {
           this.createImage(image);
         },
@@ -40,7 +40,6 @@ export class EducacionComponent implements OnInit {
   private createImage(image: Blob): any {
     if (image && image.size > 0) {
       let reader = new FileReader();
-
       reader.addEventListener("load", () => {
         this.imagePath = this._sanitizer.bypassSecurityTrustResourceUrl(String(reader.result));
         this.loading = false;
@@ -53,7 +52,7 @@ export class EducacionComponent implements OnInit {
   }
 
   delete() {
-    this.onDelete.emit(this.educacion);
+    this.onDelete.emit(this.experiencia);
   }
 
 }

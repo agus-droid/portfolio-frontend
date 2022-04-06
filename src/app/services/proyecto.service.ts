@@ -21,8 +21,8 @@ export class ProyectoService {
     return this.http.post<String>(`${this.API_URL}/nuevo`, proyecto);
   }
 
-  delete(proyecto: Proyecto): Observable<Proyecto> {
-    return this.http.delete<Proyecto>(`${this.API_URL}/borrar/${proyecto.id}`);
+  delete(proyecto: Proyecto): any {
+    return this.http.delete(`${this.API_URL}/borrar/${proyecto.id}`);
   }
 
   update(proyecto: Proyecto): Observable<Proyecto> {
