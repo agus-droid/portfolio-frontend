@@ -3,6 +3,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Experiencia } from 'src/app/models/experiencia';
 import { ExperienciaService } from 'src/app/services/experiencia.service';
 import { UsersService } from 'src/app/services/user.service';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-experiencias',
@@ -14,11 +15,19 @@ export class ExperienciasComponent implements OnInit {
   experiencias: Experiencia[] = [];
   loading: boolean = false;
   error: boolean = false;
+  experienciaForm: FormGroup = this.formBuilder.group({
+    imagen: [''],
+    titulo: [''],
+    descripcion: [''],
+    fecha: ['']
+  });
+  showModal: boolean = false;
 
   constructor(
     private experienciaService: ExperienciaService,
     private toastr: ToastrService,
     public userService: UsersService,
+    private formBuilder: FormBuilder,
   ) { }
 
   ngOnInit(): void {
@@ -51,5 +60,41 @@ export class ExperienciasComponent implements OnInit {
         this.toastr.error('Error al eliminar la experiencia', 'Error');
       }
     });
+  }
+
+  onFileSelect(event: any) {
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      this.experienciaForm.get('imagen')!.setValue(file);
+    }
+  }
+
+  add() {
+    const formData = new FormData();
+    const formulario = this.experienciaForm.value;
+    Object.keys(formulario).forEach(key => {
+      formData.append(key, formulario[key]);
+    });
+
+    this.experienciaService.add(formData).subscribe({
+      next: (data: any) => {
+        this.getAll();
+        this.toastr.success('Experiencia agregada', 'Éxito');
+        this.showModal = false;
+        this.experienciaForm = this.formBuilder.group({
+          imagen: [''],
+          titulo: [''],
+          descripcion: [''],
+          fecha: ['']
+        });
+      },
+      error: (err: any) => {
+        this.toastr.error('Error al agregar la experiencia', 'Error');
+      }
+    });
+  }
+
+  toggleModal(){
+    this.showModal = !this.showModal;
   }
 }

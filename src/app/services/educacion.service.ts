@@ -27,4 +27,8 @@ export class EducacionService {
     return this.http.delete(`${this.API_URL}/borrar/${educacion.id}`);
   }
 
+  add(formData: FormData): any {
+    return this.http.post(`${this.API_URL}/nueva`, formData);
+  }
+
 }

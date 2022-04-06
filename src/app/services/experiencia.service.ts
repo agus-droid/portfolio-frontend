@@ -26,4 +26,8 @@ export class ExperienciaService {
     return this.http.delete(`${this.API_URL}/borrar/${experiencia.id}`);
   }
 
+  add(formData: FormData): any {
+    return this.http.post(`${this.API_URL}/nueva`, formData);
+  }
+
 }
