@@ -13,6 +13,10 @@ export class ProyectoComponent implements OnInit {
 
   @Output() onDelete = new EventEmitter<Proyecto>();
 
+  @Output() onUpdate = new EventEmitter<Proyecto>();
+
+  showModal: boolean = false;
+
   constructor(
     public userService: UsersService,
   ) { }
@@ -21,5 +25,13 @@ export class ProyectoComponent implements OnInit {
 
   delete() {
     this.onDelete.emit(this.proyecto);
+  }
+
+  toggleModal(){
+    this.showModal = !this.showModal;
+  }
+
+  update() {
+    this.onUpdate.emit(this.proyecto);
   }
 }

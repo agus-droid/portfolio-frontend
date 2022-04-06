@@ -50,4 +50,16 @@ export class ProyectosComponent implements OnInit {
     });
   }
 
+  update(proyecto: Proyecto){
+    this.proyectoService.update(proyecto).subscribe({
+      next: (data: any) => {
+        this.getAll();
+        this.toastr.success('Proyecto actualizado', 'Éxito');
+      },
+      error: () => {
+        this.toastr.error('Error al actualizar el proyecto', 'Error');
+      }
+    });
+  }
+
 }

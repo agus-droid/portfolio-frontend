@@ -12,6 +12,6 @@
 </div>
 <div *ngIf="!loading">
   <div class="mt-4 justify-between rounded-xl bg-gradient-to-r bg-white border border-gray-200 dark:border-gray-700 p-2 sm:p-9 dark:bg-gray-800">
-    <app-habilidad (onDelete)="delete(habilidad)" *ngFor="let habilidad of habilidades" [habilidad]="habilidad"></app-habilidad>
+    <app-habilidad (onDelete)="delete(habilidad)" (onUpdate)="update(habilidad)" *ngFor="let habilidad of habilidades" [habilidad]="habilidad"></app-habilidad>
   </div>
 </div>

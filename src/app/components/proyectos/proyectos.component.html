@@ -11,5 +11,5 @@
   </button>
 </div>
 <div *ngIf="!loading">
-  <app-proyecto (onDelete)="delete(proyecto)" *ngFor="let proyecto of proyectos" [proyecto]="proyecto"></app-proyecto>
+  <app-proyecto (onDelete)="delete(proyecto)" (onUpdate)="update(proyecto)" *ngFor="let proyecto of proyectos" [proyecto]="proyecto"></app-proyecto>
 </div>

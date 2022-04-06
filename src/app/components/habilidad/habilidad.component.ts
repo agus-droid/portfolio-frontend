@@ -15,10 +15,12 @@ export class HabilidadComponent implements OnInit {
 
   @Output() onDelete = new EventEmitter<Habilidad>();
 
+  @Output() onUpdate = new EventEmitter<Habilidad>();
+
+  showModal: boolean = false;
+
   constructor(
     public userService: UsersService,
-    private toastr: ToastrService,
-    private habilidadService: HabilidadService
   ) { }
 
   ngOnInit(): void {
@@ -26,6 +28,14 @@ export class HabilidadComponent implements OnInit {
 
   delete() {
     this.onDelete.emit(this.habilidad);
+  }
+
+  toggleModal(){
+    this.showModal = !this.showModal;
+  }
+
+  update() {
+    this.onUpdate.emit(this.habilidad);
   }
 
 }

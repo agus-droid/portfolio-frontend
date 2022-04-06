@@ -48,4 +48,16 @@ export class HabilidadesComponent implements OnInit {
       }
     });
   }
+
+  update(habilidad: Habilidad){
+    this.habilidadService.update(habilidad).subscribe({
+      next: (data: any) => {
+        this.getAll();
+        this.toastr.success('Habilidad actualizada', 'Éxito');
+      },
+      error: () => {
+        this.toastr.error('Error al actualizar la habilidad', 'Error');
+      }
+    });
+  }
 }
