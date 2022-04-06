@@ -1,5 +1,6 @@
-<div class="pb-4 mb-2 border-b border-gray-200 dark:border-gray-800">
+<div class="pb-4 flex justify-between mb-2 border-b border-gray-200 dark:border-gray-800">
   <h2 class="inline-block mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white" id="content">Educación</h2>
+  <button *ngIf="userService.isLoggedIn()" type="button" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Nueva</button>
 </div>
 <div class="flex items-center justify-center">
   <button *ngIf="loading" type="button" class="inline-flex items-center px-4 py-2 font-semibold leading-6 text-sm shadow rounded-md text-white bg-indigo-500 hover:bg-indigo-400 transition ease-in-out duration-150 cursor-not-allowed" disabled="">

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { Habilidad } from 'src/app/models/habilidad';
 import { HabilidadService } from 'src/app/services/habilidad.service';
+import { UsersService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-habilidades',
@@ -12,9 +13,12 @@ export class HabilidadesComponent implements OnInit {
   habilidades: Habilidad[] = [];
   loading: boolean = false;
   error: boolean = false;
+  showModal: boolean = false;
+  habilidad: Habilidad = new Habilidad();
   constructor(
     private habilidadService: HabilidadService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    public userService: UsersService,
   ) { }
 
   ngOnInit(): void {
@@ -60,4 +64,23 @@ export class HabilidadesComponent implements OnInit {
       }
     });
   }
+
+  toggleModal(){
+    this.showModal = !this.showModal;
+  }
+
+  add() {
+    this.habilidadService.add(this.habilidad).subscribe({
+      next: (data: any) => {
+        this.getAll();
+        this.toastr.success('Habilidad agregada', 'Éxito');
+        this.habilidad = new Habilidad();
+        this.toggleModal();
+      },
+      error: () => {
+        this.toastr.error('Error al agregar la habilidad', 'Error');
+      }
+    });
+  }
+
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { Experiencia } from 'src/app/models/experiencia';
 import { ExperienciaService } from 'src/app/services/experiencia.service';
+import { UsersService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-experiencias',
@@ -17,6 +18,7 @@ export class ExperienciasComponent implements OnInit {
   constructor(
     private experienciaService: ExperienciaService,
     private toastr: ToastrService,
+    public userService: UsersService,
   ) { }
 
   ngOnInit(): void {

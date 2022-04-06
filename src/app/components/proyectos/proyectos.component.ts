@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { Proyecto } from 'src/app/models/proyecto';
 import { ProyectoService } from 'src/app/services/proyecto.service';
+import { UsersService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-proyectos',
@@ -13,9 +14,12 @@ export class ProyectosComponent implements OnInit {
   proyectos: Proyecto[] = [];
   loading: boolean = false;
   error: boolean = false;
+  showModal: boolean = false;
+  proyecto: Proyecto = new Proyecto();
   constructor(
     private proyectoService: ProyectoService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    public userService: UsersService,
   ) { }
 
   ngOnInit(): void {
@@ -58,6 +62,24 @@ export class ProyectosComponent implements OnInit {
       },
       error: () => {
         this.toastr.error('Error al actualizar el proyecto', 'Error');
+      }
+    });
+  }
+
+  toggleModal(){
+    this.showModal = !this.showModal;
+  }
+
+  add() {
+    this.proyectoService.add(this.proyecto).subscribe({
+      next: (data: any) => {
+        this.getAll();
+        this.toastr.success('Proyecto agregado', 'Éxito');
+        this.proyecto = new Proyecto();
+        this.toggleModal();
+      },
+      error: () => {
+        this.toastr.error('Error al agregar el proyecto', 'Error');
       }
     });
   }

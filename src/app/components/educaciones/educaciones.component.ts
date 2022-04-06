@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { EducacionService } from 'src/app/services/educacion.service';
 import { Educacion } from 'src/app/models/educacion';
+import { UsersService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-educaciones',
@@ -17,6 +18,7 @@ export class EducacionesComponent implements OnInit {
   constructor(
     private educacionService: EducacionService,
     private toastr: ToastrService,
+    public userService: UsersService,
   ) { }
 
   ngOnInit(): void {
