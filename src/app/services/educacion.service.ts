@@ -31,4 +31,8 @@ export class EducacionService {
     return this.http.post(`${this.API_URL}/nueva`, formData);
   }
 
+  update(formData: FormData, educacion: Educacion): any {
+    return this.http.put(`${this.API_URL}/editar/${educacion.id}`, formData);
+  }
+
 }

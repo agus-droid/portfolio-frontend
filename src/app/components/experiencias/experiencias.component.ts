@@ -94,6 +94,10 @@ export class ExperienciasComponent implements OnInit {
     });
   }
 
+  update(experiencia: Experiencia){
+    this.getAll();
+  }
+
   toggleModal(){
     this.showModal = !this.showModal;
   }

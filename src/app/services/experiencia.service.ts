@@ -30,4 +30,8 @@ export class ExperienciaService {
     return this.http.post(`${this.API_URL}/nueva`, formData);
   }
 
+  update(formData: FormData, experiencia: Experiencia): any {
+    return this.http.put(`${this.API_URL}/editar/${experiencia.id}`, formData);
+  }
+
 }

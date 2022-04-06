@@ -12,7 +12,7 @@
   </button>
 </div>
 <div *ngIf="!loading">
-  <app-experiencia (onDelete)="delete(experiencia)" *ngFor="let experiencia of experiencias" [experiencia]="experiencia"></app-experiencia>
+  <app-experiencia (onDelete)="delete(experiencia)" (onUpdate)="update(experiencia)" *ngFor="let experiencia of experiencias" [experiencia]="experiencia"></app-experiencia>
 </div>
 
 

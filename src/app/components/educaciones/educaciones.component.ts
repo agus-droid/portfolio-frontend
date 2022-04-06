@@ -94,6 +94,10 @@ export class EducacionesComponent implements OnInit {
     });
   }
 
+  update(educacion: Educacion){
+    this.getAll();
+  }
+
   toggleModal(){
     this.showModal = !this.showModal;
   }
