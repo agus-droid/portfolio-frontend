@@ -19,6 +19,7 @@ import { EducacionesComponent } from './components/educaciones/educaciones.compo
 import { EducacionComponent } from './components/educacion/educacion.component';
 import { ExperienciasComponent } from './components/experiencias/experiencias.component';
 import { ExperienciaComponent } from './components/experiencia/experiencia.component';
+import { AcercaComponent } from './components/acerca/acerca.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { ExperienciaComponent } from './components/experiencia/experiencia.compo
     EducacionesComponent,
     EducacionComponent,
     ExperienciasComponent,
-    ExperienciaComponent
+    ExperienciaComponent,
+    AcercaComponent
   ],
   imports: [
     BrowserModule,

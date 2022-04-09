@@ -1,0 +1,24 @@
+<img class="mt-8 mx-auto rounded" [attr.src]="bannerPath" alt="Extra large avatar">
+<div style="">
+  <img class="mt-8 mx-auto w-36 h-36 rounded-full" [attr.src]="fotoPath" alt="Extra large avatar">
+</div>
+<h1 class="mb-2 text-3xl font-extrabold text-center tracking-tight text-gray-900 dark:text-white"><p>{{ acercas[0].nombre }}</p></h1>
+<h3 class="text-center text-gray-900 dark:text-white"><p>{{ acercas[0].titulo }}</p></h3>
+<div class="flex">
+  <h4 *ngIf="!editResumen" class="text-center mt-4 text-gray-900 dark:text-white"><p>{{ acercas[0].resumen }}</p></h4>
+  <form *ngIf="editResumen" class="w-full custom-form" method="post">
+    <div class="mb-6">
+      <textarea
+        type="text"
+        [(ngModel)]="acercas[0].resumen"
+        name="resumen"
+        required="required"
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+      ></textarea>
+    </div>
+    <div class="flex items-center justify-end mt-4">
+      <button type="submit" (click)="updateResumen()" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Actualizar</button>
+    </div>
+  </form>
+</div>
+<button type="button" *ngIf="!editResumen" (click)="toggleEditResumen()" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 w-full dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Editar</button>
