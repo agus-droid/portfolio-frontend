@@ -1,24 +1,136 @@
-<img class="mt-8 mx-auto rounded" [attr.src]="bannerPath" alt="Extra large avatar">
-<div style="">
-  <img class="mt-8 mx-auto w-36 h-36 rounded-full" [attr.src]="fotoPath" alt="Extra large avatar">
-</div>
-<h1 class="mb-2 text-3xl font-extrabold text-center tracking-tight text-gray-900 dark:text-white"><p>{{ acercas[0].nombre }}</p></h1>
-<h3 class="text-center text-gray-900 dark:text-white"><p>{{ acercas[0].titulo }}</p></h3>
-<div class="flex">
-  <h4 *ngIf="!editResumen" class="text-center mt-4 text-gray-900 dark:text-white"><p>{{ acercas[0].resumen }}</p></h4>
-  <form *ngIf="editResumen" class="w-full custom-form" method="post">
-    <div class="mb-6">
-      <textarea
-        type="text"
-        [(ngModel)]="acercas[0].resumen"
-        name="resumen"
-        required="required"
-        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-      ></textarea>
+<div>
+  <div class="flex items-center mb-5 justify-center">
+    <button *ngIf="loadingBanner" type="button" class="inline-flex items-center px-4 py-2 font-semibold leading-6 text-sm shadow rounded-md text-white bg-indigo-500 hover:bg-indigo-400 transition ease-in-out duration-150 cursor-not-allowed" disabled="">
+      <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+      </svg>
+      Cargando
+    </button>
+  </div>
+  <img *ngIf="!loadingBanner" class="mt-8 mx-auto rounded" [attr.src]="bannerPath" alt="Extra large avatar">
+  <div *ngIf="editBanner" class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex">
+    <div class="relative w-auto my-6 mx-auto max-w-6xl">
+      <!--content-->
+      <div class="shadow-lg relative flex flex-col w-full  outline-none focus:outline-none code-preview rounded-xl bg-gradient-to-r bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 p-2 sm:p-6 ">
+        <!--header-->
+        <div class="flex items-start justify-between p-5 border-b border-solid dark:border-gray-600 rounded-t">
+          <h3 class="text-xl font-semibold text-gray-900 lg:text-2xl dark:text-white">
+            Editar Banner
+          </h3>
+          <button class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" (click)="toggleEditBanner()">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+          </button>
+        </div>
+        <!--body-->
+        <div class="login p-6 space-y-6">
+          <form class="custom-form" [formGroup]="bannerForm" (ngSubmit)="updateBanner()" method="post">
+            <div>
+              <label for="url" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Archivo</label>
+              <input name="imagen" (change)="onFileSelectBanner($event)" class="block w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none focus:border-transparent dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" type="file">
+            </div>
+            <div class="flex items-center justify-end mt-4">
+              <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Enviar</button>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
-    <div class="flex items-center justify-end mt-4">
-      <button type="submit" (click)="updateResumen()" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Actualizar</button>
-    </div>
-  </form>
+  </div>
+  <div *ngIf="editFoto" class="opacity-25 fixed inset-0 z-40 bg-black"></div>
 </div>
-<button type="button" *ngIf="!editResumen" (click)="toggleEditResumen()" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 w-full dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Editar</button>
+<button type="button" *ngIf="!editFoto && userService.isLoggedIn()" (click)="toggleEditBanner()" class="text-white w-full bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Editar</button>
+
+<div style="" class="items-center">
+  <div class="flex items-center mb-5 justify-center">
+    <button *ngIf="loadingFoto" type="button" class="inline-flex items-center px-4 py-2 font-semibold leading-6 text-sm shadow rounded-md text-white bg-indigo-500 hover:bg-indigo-400 transition ease-in-out duration-150 cursor-not-allowed" disabled="">
+      <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+      </svg>
+      Cargando
+    </button>
+  </div>
+  <img *ngIf="!loadingFoto" class="mt-8 mx-auto w-36 h-36 rounded-full" [attr.src]="fotoPath" alt="Extra large avatar">
+  <div *ngIf="editFoto" class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex">
+    <div class="relative w-auto my-6 mx-auto max-w-6xl">
+      <!--content-->
+      <div class="shadow-lg relative flex flex-col w-full  outline-none focus:outline-none code-preview rounded-xl bg-gradient-to-r bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 p-2 sm:p-6 ">
+        <!--header-->
+        <div class="flex items-start justify-between p-5 border-b border-solid dark:border-gray-600 rounded-t">
+          <h3 class="text-xl font-semibold text-gray-900 lg:text-2xl dark:text-white">
+            Editar Foto
+          </h3>
+          <button class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" (click)="toggleEditFoto()">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+          </button>
+        </div>
+        <!--body-->
+        <div class="login p-6 space-y-6">
+          <form class="custom-form" [formGroup]="fotoForm" (ngSubmit)="updateFoto()" method="post">
+            <div>
+              <label for="url" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Archivo</label>
+              <input name="imagen" (change)="onFileSelectFoto($event)" class="block w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none focus:border-transparent dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" type="file">
+            </div>
+            <div class="flex items-center justify-end mt-4">
+              <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Enviar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="editFoto" class="opacity-25 fixed inset-0 z-40 bg-black"></div>
+</div>
+<button type="button" *ngIf="!editFoto && userService.isLoggedIn()" (click)="toggleEditFoto()" class="text-white w-full bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Editar</button>
+
+<h1 *ngIf="!editNombre" class="mb-2 text-3xl font-extrabold text-center tracking-tight text-gray-900 dark:text-white"><p>{{ acercas[0].nombre }}</p></h1>
+<form *ngIf="editNombre" class="w-full custom-form" method="post">
+  <div class="mb-6">
+    <textarea
+      type="text"
+      [(ngModel)]="acercas[0].nombre"
+      name="resumen"
+      required="required"
+      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+    ></textarea>
+  </div>
+  <div class="flex items-center justify-end mt-4">
+    <button type="submit" (click)="updateNombre()" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Actualizar</button>
+  </div>
+</form>
+<button type="button" *ngIf="!editNombre && userService.isLoggedIn()" (click)="toggleEditNombre()" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 w-full dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Editar</button>
+
+<h3 *ngIf="!editTitulo" class="text-center text-gray-900 dark:text-white"><p>{{ acercas[0].titulo }}</p></h3>
+<form *ngIf="editTitulo" class="w-full custom-form" method="post">
+  <div class="mb-6">
+    <textarea
+      type="text"
+      [(ngModel)]="acercas[0].titulo"
+      name="resumen"
+      required="required"
+      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+    ></textarea>
+  </div>
+  <div class="flex items-center justify-end mt-4">
+    <button type="submit" (click)="updateTitulo()" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Actualizar</button>
+  </div>
+</form>
+<button type="button" *ngIf="!editTitulo && userService.isLoggedIn()" (click)="toggleEditTitulo()" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 w-full dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Editar</button>
+
+<h4 *ngIf="!editResumen" class="text-center mt-4 text-gray-900 dark:text-white"><p>{{ acercas[0].resumen }}</p></h4>
+<form *ngIf="editResumen" class="w-full custom-form" method="post">
+  <div class="mb-6">
+    <textarea
+      type="text"
+      [(ngModel)]="acercas[0].resumen"
+      name="resumen"
+      required="required"
+      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+    ></textarea>
+  </div>
+  <div class="flex items-center justify-end mt-4">
+    <button type="submit" (click)="updateResumen()" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Actualizar</button>
+  </div>
+</form>
+<button type="button" *ngIf="!editResumen && userService.isLoggedIn()" (click)="toggleEditResumen()" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 w-full dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Editar</button>
