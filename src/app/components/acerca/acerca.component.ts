@@ -86,6 +86,8 @@ export class AcercaComponent implements OnInit {
         this.error = true;
         this.loading = false;
         this.toastr.error('Error al obtener los proyectos', 'Error');
+        this.loadingFoto = false;
+        this.loadingBanner = false;
       }
     });
   }
@@ -98,6 +100,7 @@ export class AcercaComponent implements OnInit {
       },
       error: (err) => {
         console.log(err);
+        this.loadingFoto = false;
       }
     });
   }
@@ -110,6 +113,7 @@ export class AcercaComponent implements OnInit {
       },
       error: (err) => {
         console.log(err);
+        this.loadingBanner = false;
       }
     });
   }

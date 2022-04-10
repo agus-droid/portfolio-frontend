@@ -1,5 +1,5 @@
 <div>
-  <div class="flex items-center mb-5 justify-center">
+  <div class="flex items-center justify-center mt-5 mb-5">
     <button *ngIf="loadingBanner" type="button" class="inline-flex items-center px-4 py-2 font-semibold leading-6 text-sm shadow rounded-md text-white bg-indigo-500 hover:bg-indigo-400 transition ease-in-out duration-150 cursor-not-allowed" disabled="">
       <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
         <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
@@ -8,7 +8,7 @@
       Cargando
     </button>
   </div>
-  <img *ngIf="!loadingBanner" class="mt-8 mx-auto rounded" [attr.src]="bannerPath" alt="Extra large avatar">
+  <img *ngIf="!loadingBanner" class="mt-8 mx-auto rounded" [attr.src]="bannerPath" alt="Banner">
   <div *ngIf="editBanner" class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex">
     <div class="relative w-auto my-6 mx-auto max-w-6xl">
       <!--content-->
@@ -51,7 +51,7 @@
       Cargando
     </button>
   </div>
-  <img *ngIf="!loadingFoto" class="mt-8 mx-auto w-36 h-36 rounded-full" [attr.src]="fotoPath" alt="Extra large avatar">
+  <img *ngIf="!loadingFoto" class="mt-8 mx-auto w-36 h-36 rounded-full" [attr.src]="fotoPath" alt="Foto">
   <div *ngIf="editFoto" class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex">
     <div class="relative w-auto my-6 mx-auto max-w-6xl">
       <!--content-->
