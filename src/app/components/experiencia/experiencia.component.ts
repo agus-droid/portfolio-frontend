@@ -22,6 +22,7 @@ export class ExperienciaComponent implements OnInit {
   imagePath: SafeResourceUrl = "";
   loading: boolean = true;
   showModal: boolean = false;
+  faltaImagen: boolean = false;
   experienciaForm: FormGroup = this.formBuilder.group({
     imagen: [''],
     titulo: [''],
@@ -44,7 +45,8 @@ export class ExperienciaComponent implements OnInit {
           this.createImage(image);
         },
         error: (err) => {
-          console.log(err);
+          this.loading = false;
+          this.faltaImagen = true;
         }
       });
     }

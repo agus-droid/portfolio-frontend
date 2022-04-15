@@ -22,7 +22,7 @@
       </svg>
       Cargando
     </button>
-    <img *ngIf="!loading" class="rounded-t-lg mx-auto h-36" [attr.src]="imagePath" alt="Imagen educacion" />
+    <img *ngIf="!loading && !faltaImagen" class="rounded-t-lg mx-auto h-36" [attr.src]="imagePath" alt="Imagen educacion" />
   </div>
   <div *ngIf="userService.isLoggedIn()">
     <div>
